@@ -1,0 +1,101 @@
+#app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+#base.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}МОЙ КИНОСАЙТ{% endblock %}</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">My Movie Site</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+#home.html
+{% extends "base.html" %}
+
+{% block title %}Home - МОЙ КИНОСАЙТ{% endblock %}
+
+{% block content %}
+<h1>Добро пожаловать на МОЙ КИНОСАЙТ</h1>
+<p>Это главная страница где вы можете найти фильмы и обзоры на них.</p>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <img src="../static/image/movie1.jpg" class="card-img-top" alt="Фильм 1">
+            <div class="card-body">
+                <h5 class="card-title">Фильм 1</h5>
+                <p class="card-text">Снос-башки.</p>
+                <a href="#" class="btn btn-primary">Дополнительная информация</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="../static/image/movie2.jpg" class="card-img-top" alt="Фильм 2">
+            <div class="card-body">
+                <h5 class="card-title">Фильм 2</h5>
+                <p class="card-text">Треш-ток.</p>
+                <a href="#" class="btn btn-primary">Дополнительная информация</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <img src="../static/image/movie3.jpg" class="card-img-top" alt="Фильм 3">
+            <div class="card-body">
+                <h5 class="card-title">Фильм 3</h5>
+                <p class="card-text">Пушка-гонка.</p>
+                <a href="#" class="btn btn-primary">Дополнительная информация</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+#about
+{% extends "base.html" %}
+
+{% block title %}О нас - МОЙ КИНОСАЙТ{% endblock %}
+
+{% block content %}
+<h1>О нас</h1>
+<p>Добро пожаловать на Мой сайт о фильмах. Мы стремимся предоставлять самую свежую информацию о фильмах, включая обзоры, рейтинги и новости.</p>
+<p>Наша команда любителей кино неустанно работает над тем, чтобы предоставлять вам самую свежую и точную информацию. Независимо от того, являетесь ли вы обычным кинозрителем или заядлым киноманом, вы найдете здесь что-нибудь интересное.</p>
+{% endblock %}
